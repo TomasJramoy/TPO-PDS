@@ -1,6 +1,6 @@
 package model;
 
 public interface IEstadoReserva {
-    public void Pagar();
+    public void pagar();
 
 }

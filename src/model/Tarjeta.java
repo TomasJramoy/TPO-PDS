@@ -9,5 +9,5 @@ public abstract class Tarjeta extends FormaPago {
     private String emisor;
     private AdaptadorMercadoPago adaptador;
 
-    public abstract void Pagar(double monto);
+    public abstract void pagar(double monto);
 }

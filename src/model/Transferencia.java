@@ -5,7 +5,7 @@ public class Transferencia extends FormaPago {
     private AdaptadorMercadoPago adaptador;
 
     @Override
-    public void Pagar(double monto) {
+    public void pagar(double monto) {
 
     }
 }

@@ -1,5 +1,5 @@
 package model;
 
 public abstract class Descuento {
-    public abstract double CalcularDescuento();
+    public abstract double calcularDescuento();
 }

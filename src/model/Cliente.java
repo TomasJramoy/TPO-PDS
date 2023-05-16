@@ -10,7 +10,7 @@ public class Cliente {
     private String email;
     private PreferenciaContacto preferenciaContacto;
 
-    public void ReservarHabitacion(Habitacion habitacion) {
+    public void reservarHabitacion(Habitacion habitacion) {
 
     }
 

@@ -2,7 +2,7 @@ package model;
 
 public class DescuentoPorFecha extends Descuento{
     @Override
-    public double CalcularDescuento() {
+    public double calcularDescuento() {
         return 0;
     }
 }

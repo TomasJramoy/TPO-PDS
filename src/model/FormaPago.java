@@ -1,5 +1,5 @@
 package model;
 
 public abstract class FormaPago {
-    public abstract void Pagar(double monto);
+    public abstract void pagar(double monto);
 }
