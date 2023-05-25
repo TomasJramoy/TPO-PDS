@@ -42,18 +42,22 @@ public class ControladorReserva {
         }
     }
 
-    public void ReservarHabitacion(LocalDate checkIn, LocalDate checkOut, LocalDate fechaReserva, Cliente cliente, List<Huesped> huespedes, Descuento estrategiaDescuento, Habitacion habitacion) {
-        Integer nroReserva = 1;
-        if (!listaReservas.isEmpty()) {
-            nroReserva = listaReservas.get(-1).getNroReserva() + 1;
-        }
+    public void ReservarHabitacion(LocalDate checkIn, LocalDate checkOut, LocalDate fechaReserva, Cliente cliente, List<Huesped> huespedes, Descuento estrategiaDescuento, Habitacion habitacion) throws Exception {
+        if (!habitacion.getReservas().contains(checkIn) || !habitacion.getReservas().contains(checkOut)) {
+            Integer nroReserva = 1;
+            if (!listaReservas.isEmpty()) {
+                nroReserva = listaReservas.get(-1).getNroReserva() + 1;
+            }
 
-        Reserva reserva = new Reserva(nroReserva,checkIn,checkOut,fechaReserva,cliente,huespedes,habitacion.getHabitacionID());
-        reserva.setEstrategiaDescuento(estrategiaDescuento);
-        reserva.setMonto(CalcularMontoReserva(reserva, habitacion));
-        reserva.setMontoFinal(CalcularDescuentoReserva(reserva));
-        AgregarReserva(reserva, habitacion);
-        listaReservas.add(reserva);
+            Reserva reserva = new Reserva(nroReserva, checkIn, checkOut, fechaReserva, cliente, huespedes, habitacion.getHabitacionID());
+            reserva.setEstrategiaDescuento(estrategiaDescuento);
+            reserva.setMonto(CalcularMontoReserva(reserva, habitacion));
+            reserva.setMontoFinal(CalcularDescuentoReserva(reserva));
+            AgregarReserva(reserva, habitacion);
+            listaReservas.add(reserva);
+        } else {
+            throw new Exception("La habitacion no se encuentra disponible en las fechas seleccionadas.");
+        }
     }
 
 }

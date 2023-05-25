@@ -5,15 +5,24 @@ import model.Reporte;
 import model.Reserva;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ControladorReportes {
-    public void generarReporte(List<Habitacion> listaHabitaciones) {
+    private List<Reporte> listaReportes = new ArrayList<Reporte>();
+
+    public void GenerarReporte(List<Habitacion> listaHabitaciones) {
+        Reporte reporte = new Reporte();
+        String contenido = "";
         for (Habitacion habitacion:listaHabitaciones) {
-            System.out.println("La habitacion " + habitacion + " se encuentra ocupada las siguientes fechas:");
+            contenido = contenido + "\nLa habitacion " + habitacion.getHabitacionID() + " se encuentra ocupada las siguientes fechas: " ;
             for (LocalDate fecha: habitacion.getReservas()) {
-                System.out.println(fecha);
+                contenido = contenido + fecha;
             }
         }
+        reporte.setContenido(contenido);
+        listaReportes.add(reporte);
     }
+
+
 }

@@ -16,11 +16,7 @@ public class ControladorHabitacion {
 
     } */
 
-    public void publicarHabitacion() {
-
-    }
-
-    public void altaHabitacion(Integer cantidadPersonas, TipoHabitacion tipoHabitacion, List<String> extras, double precioNoche, Integer habitacionID) {
+    public void PublicarHabitacion(Integer cantidadPersonas, TipoHabitacion tipoHabitacion, List<String> extras, double precioNoche, Integer habitacionID) {
         Habitacion habitacion = new Habitacion(cantidadPersonas, tipoHabitacion, extras, precioNoche, habitacionID);
         listaHabitaciones.add(habitacion);
     }

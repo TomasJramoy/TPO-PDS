@@ -10,8 +10,12 @@ public class Cliente {
     private String email;
     private PreferenciaContacto preferenciaContacto;
 
-    public void reservarHabitacion(Habitacion habitacion) {
-
+    public Cliente(String nombre, String apellido, Integer dni, Integer telefono, String email, PreferenciaContacto preferenciaContacto) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+        this.telefono = telefono;
+        this.email = email;
+        this.preferenciaContacto = preferenciaContacto;
     }
-
 }
