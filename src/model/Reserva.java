@@ -3,6 +3,8 @@ package model;
 import java.time.LocalDate;
 import java.util.List;
 
+import static java.time.temporal.ChronoUnit.DAYS;
+
 public class Reserva {
     private Integer nroReserva;
     private LocalDate checkIn;
@@ -24,11 +26,40 @@ public class Reserva {
 
     }
 
-    public double CalcularMonto() {
-        return -1;
+    public Integer getNroReserva() {
+        return nroReserva;
     }
 
-    public double CalcularDescuento() {
-        return -1;
+    public Descuento getEstrategiaDescuento() {
+        return estrategiaDescuento;
     }
+
+    public Reserva(Integer nroReserva, LocalDate checkIn, LocalDate checkOut, LocalDate fechaReserva, Cliente cliente, List<Huesped> huespedes, Integer habitacionID) {
+        this.nroReserva = nroReserva;
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
+        this.fechaReserva = fechaReserva;
+        this.cliente = cliente;
+        this.huespedes = huespedes;
+        this.estadoReserva = new Registrada();
+        this.estrategiaDescuento = estrategiaDescuento;
+        this.habitacionID = habitacionID;
+    }
+
+    public void setMonto(double monto) {
+        this.monto = monto;
+    }
+
+    public void setMontoFinal(double montoFinal) {
+        this.montoFinal = montoFinal;
+    }
+
+    public LocalDate getCheckIn() {
+        return checkIn;
+    }
+
+    public LocalDate getCheckOut() {
+        return checkOut;
+    }
+
 }
