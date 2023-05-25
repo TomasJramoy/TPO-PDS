@@ -42,4 +42,8 @@ public class Habitacion {
     public void AgregarOcupacion(LocalDate reserva) {
         reservas.add(reserva);
     }
+
+    public void EliminarOcupacion(LocalDate reserva) {
+        reservas.remove(reserva);
+    }
 }

@@ -14,9 +14,28 @@ public class Reserva {
     private List<Huesped> huespedes;
     private IEstadoReserva estadoReserva;
     private double monto;
+
+    public IEstadoReserva getEstadoReserva() {
+        return estadoReserva;
+    }
+
     private Descuento estrategiaDescuento;
     private Integer habitacionID;
     private double montoFinal;
+
+    public void setPago(Pago pago) {
+        this.pago = pago;
+    }
+
+    public Pago getPago() {
+        return pago;
+    }
+
+    private Pago pago;
+
+    public double getMontoFinal() {
+        return montoFinal;
+    }
 
     public double CalcularAnticipacionReserva() {
         return -1;

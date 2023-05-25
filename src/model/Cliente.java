@@ -8,6 +8,11 @@ public class Cliente {
     private Integer dni;
     private Integer telefono;
     private String email;
+
+    public PreferenciaContacto getPreferenciaContacto() {
+        return preferenciaContacto;
+    }
+
     private PreferenciaContacto preferenciaContacto;
 
     public Cliente(String nombre, String apellido, Integer dni, Integer telefono, String email, PreferenciaContacto preferenciaContacto) {

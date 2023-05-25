@@ -15,12 +15,20 @@ public class ControladorReserva {
 
     }
 
-    public void cancelarReserva(Integer nroReserva) {
-
+    public void CancelarReserva(Habitacion habitacion, Reserva reserva) {
+        if (reserva.getEstadoReserva().equals(Registrada.class)) {
+            listaReservas.remove(reserva);
+            int dias = (int) DAYS.between(reserva.getCheckIn(), reserva.getCheckOut());
+            for (int i=0; i<=dias;i++) {
+                habitacion.EliminarOcupacion(reserva.getCheckIn().plusDays(i));
+            }
+        }
     }
 
-    public void pagarReserva(Reserva reserva) {
-
+    public void PagarReserva(Reserva reserva, FormaPago formaPago) {
+        Pago pago = new Pago(formaPago);
+        reserva.setPago(pago);
+        reserva.getPago().PagarReserva(reserva.getMontoFinal());
     }
 
     public double CalcularMontoReserva(Reserva reserva, Habitacion habitacion) {
