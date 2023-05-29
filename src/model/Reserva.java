@@ -11,6 +11,11 @@ public class Reserva {
     private LocalDate checkOut;
     private LocalDate fechaReserva;
     private Cliente cliente;
+
+    public LocalDate getFechaReserva() {
+        return fechaReserva;
+    }
+
     private List<Huesped> huespedes;
     private IEstadoReserva estadoReserva;
     private double monto;
@@ -36,21 +41,18 @@ public class Reserva {
         return montoFinal;
     }
 
-    public void calcularAnticipacionReserva() {
+    public void CalcularDescuento() {
         this.montoFinal = this.monto * this.estrategiaDescuento.calcularDescuento(this.fechaReserva).getDescuento();
     }
 
-    public void setEstrategiaDescuento(Descuento estrategia) {
-
+    public void setEstrategiaDescuento(Descuento estrategiaDescuento) {
+        this.estrategiaDescuento = estrategiaDescuento;
     }
 
     public Integer getNroReserva() {
         return nroReserva;
     }
 
-    public Descuento getEstrategiaDescuento() {
-        return estrategiaDescuento;
-    }
 
     public Reserva(Integer nroReserva, LocalDate checkIn, LocalDate checkOut, LocalDate fechaReserva, Cliente cliente, List<Huesped> huespedes, Integer habitacionID) {
         this.nroReserva = nroReserva;
@@ -68,9 +70,6 @@ public class Reserva {
         this.monto = monto;
     }
 
-    public void setMontoFinal(double montoFinal) {
-        this.montoFinal = montoFinal;
-    }
 
     public LocalDate getCheckIn() {
         return checkIn;

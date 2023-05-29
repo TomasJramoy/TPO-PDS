@@ -25,7 +25,9 @@ public class ControladorReserva {
         }
     }
 
-    public void PagarReserva(Reserva reserva, FormaPago formaPago) {
+    public void PagarReserva(Reserva reserva, FormaPago formaPago, Descuento descuento) {
+        reserva.setEstrategiaDescuento(descuento);
+        reserva.CalcularDescuento();
         Pago pago = new Pago(formaPago);
         reserva.setPago(pago);
         reserva.getPago().PagarReserva(reserva.getMontoFinal());
@@ -37,12 +39,6 @@ public class ControladorReserva {
         return monto;
     }
 
-    public double CalcularDescuentoReserva(Reserva reserva) {
-        Descuento descuento = reserva.getEstrategiaDescuento();
-        double montoFinal = descuento.calcularDescuento();
-        return montoFinal;
-    }
-
     public void AgregarReserva(Reserva reserva, Habitacion habitacion) {
         int dias = (int) DAYS.between(reserva.getCheckIn(), reserva.getCheckOut());
         for (int i=0; i<=dias;i++) {
@@ -50,7 +46,7 @@ public class ControladorReserva {
         }
     }
 
-    public void ReservarHabitacion(LocalDate checkIn, LocalDate checkOut, LocalDate fechaReserva, Cliente cliente, List<Huesped> huespedes, Descuento estrategiaDescuento, Habitacion habitacion) throws Exception {
+    public void ReservarHabitacion(LocalDate checkIn, LocalDate checkOut, LocalDate fechaReserva, Cliente cliente, List<Huesped> huespedes, Habitacion habitacion) throws Exception {
         if (!habitacion.getReservas().contains(checkIn) || !habitacion.getReservas().contains(checkOut)) {
             Integer nroReserva = 1;
             if (!listaReservas.isEmpty()) {
@@ -58,9 +54,7 @@ public class ControladorReserva {
             }
 
             Reserva reserva = new Reserva(nroReserva, checkIn, checkOut, fechaReserva, cliente, huespedes, habitacion.getHabitacionID());
-            reserva.setEstrategiaDescuento(estrategiaDescuento);
             reserva.setMonto(CalcularMontoReserva(reserva, habitacion));
-            reserva.setMontoFinal(CalcularDescuentoReserva(reserva));
             AgregarReserva(reserva, habitacion);
             listaReservas.add(reserva);
         } else {
