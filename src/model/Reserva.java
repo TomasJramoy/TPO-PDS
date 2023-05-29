@@ -14,7 +14,6 @@ public class Reserva {
     private List<Huesped> huespedes;
     private IEstadoReserva estadoReserva;
     private double monto;
-
     public IEstadoReserva getEstadoReserva() {
         return estadoReserva;
     }
@@ -37,8 +36,8 @@ public class Reserva {
         return montoFinal;
     }
 
-    public double CalcularAnticipacionReserva() {
-        return -1;
+    public void calcularAnticipacionReserva() {
+        this.montoFinal = this.monto * this.estrategiaDescuento.calcularDescuento(this.fechaReserva).getDescuento();
     }
 
     public void setEstrategiaDescuento(Descuento estrategia) {

@@ -1,5 +1,6 @@
 package model;
+import java.time.LocalDate;
 
 public abstract class Descuento {
-    public abstract double calcularDescuento();
+    public abstract DescuentoPorFecha calcularDescuento(LocalDate fechaReserva);
 }
