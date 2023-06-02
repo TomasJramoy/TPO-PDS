@@ -6,6 +6,6 @@ public class Transferencia extends FormaPago {
 
     @Override
     public void pagar(double monto) {
-
+        System.out.println("Pagado con transferencia: " + monto);
     }
 }

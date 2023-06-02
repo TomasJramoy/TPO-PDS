@@ -1,6 +1,6 @@
 package model;
 
-public class Cancelada implements IEstadoReserva {
+public class Facturada implements IEstadoReserva {
     @Override
     public void pagar(Reserva reserva) {
 

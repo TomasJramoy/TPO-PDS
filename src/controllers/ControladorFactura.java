@@ -2,9 +2,17 @@ package controllers;
 
 import model.*;
 
-public class ControladorFactura {
-    public void generarFactura() {
+import java.util.ArrayList;
+import java.util.List;
 
+public class ControladorFactura {
+    private List<Factura> listaFacturas = new ArrayList<Factura>();
+
+
+    public void generarFactura(Reserva reserva) {
+        Factura factura = new Factura(reserva);
+        reserva.getEstadoReserva().pagar(reserva);
+        listaFacturas.add(factura);
     }
 
     public void enviarFactura(Cliente cliente, Factura factura) {

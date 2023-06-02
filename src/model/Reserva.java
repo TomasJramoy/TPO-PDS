@@ -10,6 +10,11 @@ public class Reserva {
     private LocalDate checkIn;
     private LocalDate checkOut;
     private LocalDate fechaReserva;
+
+    public void setEstadoReserva(IEstadoReserva estadoReserva) {
+        this.estadoReserva = estadoReserva;
+    }
+
     private Cliente cliente;
 
     public LocalDate getFechaReserva() {

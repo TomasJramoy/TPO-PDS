@@ -9,6 +9,6 @@ public class SMS implements INotificacion {
 
     @Override
     public void enviarModificacion(Cliente cliente, Reserva reserva) {
-
+        String texto = "Su reserva ha pasado al estado: " + reserva.getEstadoReserva().toString();
     }
 }

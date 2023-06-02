@@ -31,6 +31,7 @@ public class ControladorReserva {
         Pago pago = new Pago(formaPago);
         reserva.setPago(pago);
         reserva.getPago().PagarReserva(reserva.getMontoFinal());
+        reserva.getEstadoReserva().pagar(reserva);
     }
 
     public double CalcularMontoReserva(Reserva reserva, Habitacion habitacion) {
