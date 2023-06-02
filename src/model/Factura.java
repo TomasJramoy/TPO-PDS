@@ -6,8 +6,11 @@ public class Factura {
 
     public Factura(Reserva reserva) {
         this.reserva = reserva;
-        contenido = "Reserva nro: " + reserva.getNroReserva() + "\nMonto final: " + reserva.getMontoFinal() + "\nEstadia desde la fecha: " + reserva.getCheckIn() + " hasta: " + reserva.getCheckOut();
+        contenido = "Reserva nro: " + reserva.getNroReserva() + "\nMonto final: " + reserva.getMontoFinal() + "\nMedio de Pago: " + reserva.getPago().toString() +
+                "\nEstadia desde la fecha: " + reserva.getCheckIn() + " hasta: " + reserva.getCheckOut();
     }
 
-
+    public String getContenido() {
+        return contenido;
+    }
 }

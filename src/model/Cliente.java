@@ -13,6 +13,10 @@ public class Cliente {
         return preferenciaContacto;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
     private PreferenciaContacto preferenciaContacto;
 
     public Cliente(String nombre, String apellido, Integer dni, Integer telefono, String email, PreferenciaContacto preferenciaContacto) {
