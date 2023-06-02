@@ -7,6 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ControladorHabitacion {
+    private static ControladorHabitacion instancia;
+
+    public static ControladorHabitacion getInstancia() {
+        if (instancia==null) {
+            instancia = new ControladorHabitacion();
+        }
+        return  instancia;
+    }
     private List<Habitacion> listaHabitaciones = new ArrayList<Habitacion>();
 
     public List<Habitacion> getListaHabitaciones() {

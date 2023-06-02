@@ -9,6 +9,14 @@ import java.util.List;
 import static java.time.temporal.ChronoUnit.DAYS;
 
 public class ControladorReserva {
+    private static ControladorReserva instancia;
+
+    public static ControladorReserva getInstancia() {
+        if (instancia==null) {
+            instancia = new ControladorReserva();
+        }
+        return  instancia;
+    }
     private List<Reserva> listaReservas = new ArrayList<Reserva>();
 
     public void controlarReservas() {

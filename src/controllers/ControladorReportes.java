@@ -9,6 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ControladorReportes {
+    private static ControladorReportes instancia;
+
+    public static ControladorReportes getInstancia() {
+        if (instancia==null) {
+            instancia = new ControladorReportes();
+        }
+        return  instancia;
+    }
     private List<Reporte> listaReportes = new ArrayList<Reporte>();
 
     public void GenerarReporte(List<Habitacion> listaHabitaciones) {

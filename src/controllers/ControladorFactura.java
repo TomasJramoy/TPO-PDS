@@ -6,6 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ControladorFactura {
+    private static ControladorFactura instancia;
+
+    public static ControladorFactura getInstancia() {
+        if (instancia==null) {
+            instancia = new ControladorFactura();
+        }
+        return  instancia;
+    }
     private List<Factura> listaFacturas = new ArrayList<Factura>();
 
 

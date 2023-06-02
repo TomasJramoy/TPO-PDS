@@ -3,6 +3,14 @@ package controllers;
 import model.*;
 
 public class ControladorNotificacion {
+    private static ControladorNotificacion instancia;
+
+    public static ControladorNotificacion getInstancia() {
+        if (instancia==null) {
+            instancia = new ControladorNotificacion();
+        }
+        return  instancia;
+    }
     public void enviarModificacion(Cliente cliente, Reserva reserva) {
         if (cliente.getPreferenciaContacto().equals("SMS")) {
             INotificacion notificacion = new SMS();
