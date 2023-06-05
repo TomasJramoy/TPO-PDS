@@ -15,10 +15,10 @@ public class ControladorNotificacion {
         if (cliente.getPreferenciaContacto().equals("SMS")) {
             INotificacion notificacion = new SMS();
             notificacion.enviarModificacion(cliente, reserva);
-        } else if (cliente.getPreferenciaContacto().equals("WhatsApp")) {
+        } else if (cliente.getPreferenciaContacto().equals("WHATSAPP")) {
             INotificacion notificacion = new Whatsapp();
             notificacion.enviarModificacion(cliente, reserva);
-        } else if (cliente.getPreferenciaContacto().equals("email")) {
+        } else if (cliente.getPreferenciaContacto().equals("EMAIL")) {
             INotificacion notificacion = new Email();
             notificacion.enviarModificacion(cliente, reserva);
         }

@@ -1,5 +1,6 @@
 package model;
 
+import ennumerations.Extra;
 import ennumerations.TipoHabitacion;
 
 import java.time.LocalDate;
@@ -9,12 +10,25 @@ import java.util.List;
 public class Habitacion {
     private Integer cantidadPersonas;
     private TipoHabitacion tipoHabitacion;
-    private List<String> extras;
+    private List<Extra> extras;
     private double precioNoche;
     private List<LocalDate> reservas;
+
+    public Integer getCantidadPersonas() {
+        return cantidadPersonas;
+    }
+
+    public TipoHabitacion getTipoHabitacion() {
+        return tipoHabitacion;
+    }
+
+    public List<Extra> getExtras() {
+        return extras;
+    }
+
     private Integer habitacionID;
 
-    public Habitacion(Integer cantidadPersonas, TipoHabitacion tipoHabitacion, List<String> extras, double precioNoche, Integer habitacionID) {
+    public Habitacion(Integer cantidadPersonas, TipoHabitacion tipoHabitacion, List<Extra> extras, double precioNoche, Integer habitacionID) {
         this.cantidadPersonas = cantidadPersonas;
         this.tipoHabitacion = tipoHabitacion;
         this.extras = extras;

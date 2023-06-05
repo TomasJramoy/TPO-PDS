@@ -1,5 +1,5 @@
 package ennumerations;
 
 public enum PreferenciaContacto {
-    SMS, WhatsApp, email
+    SMS, WHATSAPP, EMAIL
 }

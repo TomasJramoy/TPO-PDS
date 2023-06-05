@@ -2,7 +2,6 @@ package controllers;
 
 import model.Habitacion;
 import model.Reporte;
-import model.Reserva;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -19,7 +18,7 @@ public class ControladorReportes {
     }
     private List<Reporte> listaReportes = new ArrayList<Reporte>();
 
-    public void GenerarReporte(List<Habitacion> listaHabitaciones) {
+    public void generarReporte(List<Habitacion> listaHabitaciones) {
         Reporte reporte = new Reporte();
         String contenido = "";
         for (Habitacion habitacion:listaHabitaciones) {

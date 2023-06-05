@@ -1,5 +1,5 @@
 package ennumerations;
 
 public enum TipoHabitacion {
-    SIMPLE, DOBLE, DELUXE
+    HABITACION, SUITE
 }

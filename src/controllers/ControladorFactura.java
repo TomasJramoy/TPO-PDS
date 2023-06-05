@@ -27,10 +27,10 @@ public class ControladorFactura {
         if (cliente.getPreferenciaContacto().equals("SMS")) {
             INotificacion notificacion = new SMS();
             notificacion.enviarFactura(cliente, factura);
-        } else if (cliente.getPreferenciaContacto().equals("WhatsApp")) {
+        } else if (cliente.getPreferenciaContacto().equals("WHATSAPP")) {
             INotificacion notificacion = new Whatsapp();
             notificacion.enviarFactura(cliente, factura);
-        } else if (cliente.getPreferenciaContacto().equals("email")) {
+        } else if (cliente.getPreferenciaContacto().equals("EMAIL")) {
             INotificacion notificacion = new Email();
             notificacion.enviarFactura(cliente, factura);
         }
