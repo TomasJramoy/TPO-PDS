@@ -24,22 +24,11 @@ public class ControladorReserva {
     }
 
     public void cancelarReserva(Habitacion habitacion, Reserva reserva) {
-        if (reserva.getEstadoReserva().equals(Registrada.class)) {
-            listaReservas.remove(reserva);
-            int dias = (int) DAYS.between(reserva.getCheckIn(), reserva.getCheckOut());
-            for (int i=0; i<=dias;i++) {
-                habitacion.EliminarOcupacion(reserva.getCheckIn().plusDays(i));
-            }
-        }
+        reserva.getEstadoReserva().cancelar(habitacion,reserva);
     }
 
     public void pagarReserva(Reserva reserva, FormaPago formaPago, Descuento descuento) {
-        reserva.setEstrategiaDescuento(descuento);
-        reserva.CalcularDescuento();
-        Pago pago = new Pago(formaPago);
-        reserva.setPago(pago);
-        reserva.getPago().PagarReserva(reserva.getMontoFinal());
-        reserva.getEstadoReserva().pagar(reserva);
+        reserva.getEstadoReserva().pagar(reserva, formaPago, descuento);
     }
 
     public double calcularMontoReserva(Reserva reserva, Habitacion habitacion) {

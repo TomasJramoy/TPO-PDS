@@ -18,9 +18,9 @@ public class ControladorFactura {
 
 
     public void generarFactura(Reserva reserva) {
-        Factura factura = new Factura(reserva);
-        reserva.getEstadoReserva().pagar(reserva);
-        listaFacturas.add(factura);
+        if (reserva.getEstadoReserva().toString()=="Pagada") {
+            Factura factura = new Factura(reserva);
+        }
     }
 
     public void enviarFactura(Cliente cliente, Factura factura) {
