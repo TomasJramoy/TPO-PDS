@@ -45,6 +45,9 @@ public class Reserva {
     public double getMontoFinal() {
         return montoFinal;
     }
+    public Cliente getCliente() {
+        return cliente;
+    }
 
     public void CalcularDescuento() {
         this.montoFinal = this.monto * this.estrategiaDescuento.calcularDescuento(this.fechaReserva).getDescuento();

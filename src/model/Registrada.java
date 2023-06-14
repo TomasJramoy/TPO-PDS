@@ -11,6 +11,9 @@ public class Registrada implements IEstadoReserva {
         Pago pago = new Pago(formaPago);
         reserva.setPago(pago);
         reserva.getPago().PagarReserva(reserva.getMontoFinal());
+        INotificacion notificacion = FactoryNotificacion.crearEstrategiaNotificacion(reserva.getCliente().getPreferenciaContacto());
+        notificacion.enviarModificacion(reserva.getCliente(), reserva);
+        
     }
 
     @Override
@@ -20,5 +23,7 @@ public class Registrada implements IEstadoReserva {
             for (int i=0; i<=dias;i++) {
                 habitacion.EliminarOcupacion(reserva.getCheckIn().plusDays(i));
             }
+            INotificacion notificacion = FactoryNotificacion.crearEstrategiaNotificacion(reserva.getCliente().getPreferenciaContacto());
+            notificacion.enviarModificacion(reserva.getCliente(), reserva);
         }
 }

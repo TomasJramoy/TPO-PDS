@@ -20,7 +20,11 @@ public class ControladorReserva {
     private List<Reserva> listaReservas = new ArrayList<Reserva>();
 
     public void controlarReservas() {
-
+        for (Reserva reserva:listaReservas) {
+            if (reserva.getCheckOut().isBefore(LocalDate.now())) {
+                listaReservas.remove(reserva);
+            }
+        }
     }
 
     public void cancelarReserva(Habitacion habitacion, Reserva reserva) {
