@@ -2,6 +2,9 @@ package model;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
+import interfaces.IEstadoReserva;
+import interfaces.INotificacion;
+
 public class Registrada implements IEstadoReserva {
     @Override
     public void pagar(Reserva reserva, FormaPago formaPago, Descuento descuento) {

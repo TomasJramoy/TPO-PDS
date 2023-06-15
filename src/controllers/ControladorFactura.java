@@ -5,6 +5,8 @@ import model.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import interfaces.INotificacion;
+
 public class ControladorFactura {
     private static ControladorFactura instancia;
 

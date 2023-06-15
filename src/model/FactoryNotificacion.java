@@ -1,6 +1,7 @@
 package model;
 
 import ennumerations.PreferenciaContacto;
+import interfaces.INotificacion;
 
 public class FactoryNotificacion {
     public static INotificacion crearEstrategiaNotificacion(PreferenciaContacto preferenciaContacto) {

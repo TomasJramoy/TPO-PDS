@@ -3,6 +3,11 @@ package model;
 public class Transferencia extends FormaPago {
     private double cvu;
     private AdaptadorMercadoPago adaptador;
+   
+    public Transferencia() {
+        this.adaptador= new AdaptadorMercadoPago();
+    }
+
 
     @Override
     public String toString() {
@@ -11,6 +16,6 @@ public class Transferencia extends FormaPago {
 
     @Override
     public void pagar(double monto) {
-        System.out.println("Pagado con transferencia: " + monto);
+        this.adaptador.pagar(monto, this.toString());
     }
 }

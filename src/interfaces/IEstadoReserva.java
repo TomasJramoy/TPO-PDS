@@ -1,4 +1,9 @@
-package model;
+package interfaces;
+
+import model.Descuento;
+import model.FormaPago;
+import model.Habitacion;
+import model.Reserva;
 
 public interface IEstadoReserva {
     public void pagar(Reserva reserva, FormaPago formaPago, Descuento descuento);

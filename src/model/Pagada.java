@@ -1,5 +1,7 @@
 package model;
 
+import interfaces.IEstadoReserva;
+
 public class Pagada implements IEstadoReserva {
     @Override
     public void pagar(Reserva reserva, FormaPago formaPago, Descuento descuento) {

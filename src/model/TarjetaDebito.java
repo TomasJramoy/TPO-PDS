@@ -1,6 +1,13 @@
 package model;
 
+import java.time.LocalDate;
+
 public class TarjetaDebito extends Tarjeta {
+    private AdaptadorMercadoPago adaptador;
+    public TarjetaDebito() {
+        this.adaptador= new AdaptadorMercadoPago();
+    }
+    
     @Override
     public String toString() {
         return "Tarjeta de Debito";
@@ -8,6 +15,6 @@ public class TarjetaDebito extends Tarjeta {
 
     @Override
     public void pagar(double monto) {
-        System.out.println("Pagado con tarjeta de debito: " + monto);
+        this.adaptador.pagar(monto, this.toString());
     }
 }

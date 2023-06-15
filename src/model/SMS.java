@@ -1,5 +1,7 @@
 package model;
 
+import interfaces.INotificacion;
+
 public class SMS implements INotificacion {
 
     @Override

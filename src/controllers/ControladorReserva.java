@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import ennumerations.DescuentoAplicable;
+
 import static java.time.temporal.ChronoUnit.DAYS;
 
 public class ControladorReserva {
@@ -31,7 +33,8 @@ public class ControladorReserva {
         reserva.getEstadoReserva().cancelar(habitacion,reserva);
     }
 
-    public void pagarReserva(Reserva reserva, FormaPago formaPago, Descuento descuento) {
+    public void pagarReserva(Reserva reserva, FormaPago formaPago, DescuentoAplicable descuentoAplicable) {
+        Descuento descuento = FactoryDescuento.crearEstrategiaDescuento(descuentoAplicable);
         reserva.getEstadoReserva().pagar(reserva, formaPago, descuento);
     }
 

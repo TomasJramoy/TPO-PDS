@@ -1,32 +1,22 @@
 package model;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
-public class DescuentoPorFecha extends Descuento{
-    // @Override
+public class DescuentoPorFecha implements Descuento{
 
-    private double descuento = 1;
+    public int diferenciaDias(LocalDate fechaReserva, LocalDate checkIn) {
+        return (int) ChronoUnit.DAYS.between(fechaReserva, checkIn);
+    }
     
-    private int _PLAZO_DESCUENTO_MINIMO_ = 15;
-    private double _PORCENTAJE_DESCUENTO_MINIMO_ = 0.85;
-    private int _PLAZO_DESCUENTO_MAXIMO_ = 61;
-    private double _PORCENTAJE_DESCUENTO_MAXIMO_ = 0.80;
-
-    public DescuentoPorFecha calcularDescuento(LocalDate fechaReserva) {
-        LocalDate now = LocalDate.now();
-
-        if (fechaReserva.isBefore(now.plusDays(_PLAZO_DESCUENTO_MAXIMO_))) {
-            // this.descuento = monto * _PORCENTAJE_DESCUENTO_MAXIMO_;
-            this.descuento = _PORCENTAJE_DESCUENTO_MAXIMO_;
-        } else if (fechaReserva.isBefore(now.plusDays(_PLAZO_DESCUENTO_MINIMO_))) {
-            // this.descuento = monto * _PORCENTAJE_DESCUENTO_MINIMO_;
-            this.descuento = _PORCENTAJE_DESCUENTO_MINIMO_;
-        }
-
-        return this;
+    public double calcularDescuento(Reserva reserva) {
+        double indice = 0;
+        int dias = diferenciaDias(reserva.getFechaReserva(), reserva.getCheckIn());
+        if (dias >=15 && dias<60) 
+            indice = -0.15;
+        else if (dias>60)
+            indice = 0.20;
+        return reserva.getMonto() + reserva.getMonto()*indice;
     }
 
-    public double getDescuento() {
-        return this.descuento;
-    }
 
 }

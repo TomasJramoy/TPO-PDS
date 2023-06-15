@@ -3,6 +3,8 @@ package model;
 import java.time.LocalDate;
 import java.util.List;
 
+import interfaces.IEstadoReserva;
+
 import static java.time.temporal.ChronoUnit.DAYS;
 
 public class Reserva {
@@ -42,6 +44,10 @@ public class Reserva {
 
     private Pago pago;
 
+    public double getMonto() {
+        return monto;
+    }
+
     public double getMontoFinal() {
         return montoFinal;
     }
@@ -50,7 +56,7 @@ public class Reserva {
     }
 
     public void CalcularDescuento() {
-        this.montoFinal = this.monto * this.estrategiaDescuento.calcularDescuento(this.fechaReserva).getDescuento();
+        this.montoFinal = this.estrategiaDescuento.calcularDescuento(this);
     }
 
     public void setEstrategiaDescuento(Descuento estrategiaDescuento) {

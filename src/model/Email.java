@@ -1,5 +1,7 @@
 package model;
 
+import interfaces.INotificacion;
+
 public class Email implements INotificacion {
     @Override
     public void enviarFactura(Cliente cliente, Factura factura) {
