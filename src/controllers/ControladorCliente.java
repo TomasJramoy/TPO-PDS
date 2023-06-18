@@ -22,4 +22,7 @@ public class ControladorCliente {
         listaClientes.add(cliente);
     }
 
+    public List<Cliente> getListaClientes() {
+        return this.listaClientes;
+    }
 }

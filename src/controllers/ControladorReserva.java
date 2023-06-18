@@ -21,6 +21,11 @@ public class ControladorReserva {
     }
     private List<Reserva> listaReservas = new ArrayList<Reserva>();
 
+     public List<Reserva> getListaReservas() {
+        return listaReservas;
+    }
+
+
     public void controlarReservas() {
         for (Reserva reserva:listaReservas) {
             if (reserva.getCheckOut().isBefore(LocalDate.now())) {
@@ -51,7 +56,7 @@ public class ControladorReserva {
         }
     }
 
-    public void reservarHabitacion(LocalDate checkIn, LocalDate checkOut, LocalDate fechaReserva, Cliente cliente, List<Huesped> huespedes, Habitacion habitacion) throws Exception {
+    public void reservarHabitacion(LocalDate checkIn, LocalDate checkOut, LocalDate fechaReserva, Cliente cliente, List<Huesped> huespedes, Habitacion habitacion) {
         if (!habitacion.getReservas().contains(checkIn) || !habitacion.getReservas().contains(checkOut)) {
             Integer nroReserva = 1;
             if (!listaReservas.isEmpty()) {
@@ -63,7 +68,7 @@ public class ControladorReserva {
             agregarReserva(reserva, habitacion);
             listaReservas.add(reserva);
         } else {
-            throw new Exception("La habitacion no se encuentra disponible en las fechas seleccionadas.");
+            System.out.println("La habitacion no se encuentra disponible en las fechas seleccionadas.");
         }
     }
 

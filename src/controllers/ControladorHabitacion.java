@@ -21,6 +21,7 @@ public class ControladorHabitacion {
     public List<Habitacion> getListaHabitaciones() {
         return listaHabitaciones;
     }
+    
     public List<Habitacion> filtrarTipo(TipoHabitacion tipoHabitacion) {
         List<Habitacion> listaFiltrada = new ArrayList<Habitacion>();
         for (Habitacion habitacion: listaHabitaciones) {

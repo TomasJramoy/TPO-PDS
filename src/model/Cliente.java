@@ -17,6 +17,10 @@ public class Cliente {
         return nombre;
     }
 
+    public int getDni() {
+        return dni;
+    }
+
     private PreferenciaContacto preferenciaContacto;
 
     public Cliente(String nombre, String apellido, Integer dni, Integer telefono, String email, PreferenciaContacto preferenciaContacto) {

@@ -93,4 +93,8 @@ public class Reserva {
         return checkOut;
     }
 
+    public Integer getHabitacionID() {
+        return habitacionID;
+    }
+
 }
