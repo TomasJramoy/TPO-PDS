@@ -1,6 +1,5 @@
 package model;
 
-import java.time.LocalDate;
 
 public class TarjetaDebito extends Tarjeta {
     private AdaptadorMercadoPago adaptador;

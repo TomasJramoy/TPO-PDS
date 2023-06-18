@@ -54,8 +54,7 @@ public class ControladorHabitacion {
         return listaFiltrada;
     }
 
-    public void publicarHabitacion(Integer cantidadPersonas, TipoHabitacion tipoHabitacion, List<Extra> extras, double precioNoche, Integer habitacionID) {
-        Habitacion habitacion = new Habitacion(cantidadPersonas, tipoHabitacion, extras, precioNoche, habitacionID);
+    public void publicarHabitacion(Habitacion habitacion) {
         listaHabitaciones.add(habitacion);
     }
 }

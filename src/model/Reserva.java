@@ -5,7 +5,6 @@ import java.util.List;
 
 import interfaces.IEstadoReserva;
 
-import static java.time.temporal.ChronoUnit.DAYS;
 
 public class Reserva {
     private Integer nroReserva;

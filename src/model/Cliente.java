@@ -17,7 +17,19 @@ public class Cliente {
         return nombre;
     }
 
-    public int getDni() {
+    public String getApellido() {
+        return apellido;
+    }
+
+    public Integer getTelefono() {
+        return telefono;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Integer getDni() {
         return dni;
     }
 

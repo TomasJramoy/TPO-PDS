@@ -56,14 +56,8 @@ public class ControladorReserva {
         }
     }
 
-    public void reservarHabitacion(LocalDate checkIn, LocalDate checkOut, LocalDate fechaReserva, Cliente cliente, List<Huesped> huespedes, Habitacion habitacion) {
-        if (!habitacion.getReservas().contains(checkIn) || !habitacion.getReservas().contains(checkOut)) {
-            Integer nroReserva = 1;
-            if (!listaReservas.isEmpty()) {
-                nroReserva = listaReservas.get(-1).getNroReserva() + 1;
-            }
-
-            Reserva reserva = new Reserva(nroReserva, checkIn, checkOut, fechaReserva, cliente, huespedes, habitacion.getHabitacionID());
+    public void reservarHabitacion(Reserva reserva, Habitacion habitacion) {
+        if (!habitacion.getReservas().contains(reserva.getCheckIn()) || !habitacion.getReservas().contains(reserva.getCheckOut())) {
             reserva.setMonto(calcularMontoReserva(reserva, habitacion));
             agregarReserva(reserva, habitacion);
             listaReservas.add(reserva);
