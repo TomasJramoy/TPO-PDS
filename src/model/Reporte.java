@@ -6,4 +6,8 @@ public class Reporte {
     public void setContenido(String contenido) {
         this.contenido = contenido;
     }
+
+    public void imprimir() {
+        System.out.println(contenido);
+    }
 }

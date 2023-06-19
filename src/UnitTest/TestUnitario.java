@@ -11,8 +11,8 @@ import org.junit.Test;
 import controllers.ControladorCliente;
 import controllers.ControladorFactura;
 import controllers.ControladorHabitacion;
+import controllers.ControladorReportes;
 import controllers.ControladorReserva;
-import ennumerations.DescuentoAplicable;
 import ennumerations.Extra;
 import ennumerations.PreferenciaContacto;
 import ennumerations.TipoHabitacion;
@@ -20,10 +20,8 @@ import interfaces.FormaPago;
 import model.Cliente;
 import model.Factura;
 import model.Habitacion;
-import model.Pagada;
 import model.Reserva;
 import model.TarjetaCredito;
-import model.Transferencia;
 
 
 public class TestUnitario {
@@ -40,6 +38,7 @@ public class TestUnitario {
         // Verificar que el cliente se haya agregado correctamente a la lista
         Assert.assertEquals(1, listaClientes.size());
         Assert.assertEquals(cliente, listaClientes.get(0));
+        System.out.println(controladorCliente.getListaClientes().get(0).getDni());
     }
 
 
@@ -47,14 +46,10 @@ public class TestUnitario {
     @Test
     public void testPublicarHabitacion() {
         ControladorHabitacion controladorHabitacion = ControladorHabitacion.getInstancia();
-        int cantidadPersonas = 2;
-        TipoHabitacion tipoHabitacion = TipoHabitacion.DOBLE;
         List<Extra> extras = new ArrayList<>();
         extras.add(Extra.DESPERTADOR);
-        double precioNoche = 100.0;
-        Integer habitacionID = 1;
-        Habitacion habitacion = new Habitacion(cantidadPersonas, tipoHabitacion, extras, precioNoche, habitacionID);
-
+        
+        Habitacion habitacion = new Habitacion(2, TipoHabitacion.DOBLE, extras, 100.0, 1);
         controladorHabitacion.publicarHabitacion(habitacion);
 
         List<Habitacion> listaHabitaciones = controladorHabitacion.getListaHabitaciones();
@@ -62,6 +57,7 @@ public class TestUnitario {
         // Verificar que la habitación se haya agregado correctamente a la lista
         Assert.assertEquals(1, listaHabitaciones.size());
         Assert.assertEquals(habitacion, listaHabitaciones.get(0));
+        System.out.println(controladorHabitacion.getListaHabitaciones().get(0).getHabitacionID());
     }
 
 
@@ -80,6 +76,9 @@ public class TestUnitario {
         // Verificar que se obtengan las habitaciones correctas
         Assert.assertEquals(1, habitacionesFiltradas.size());
         Assert.assertEquals(tipoHabitacion, habitacionesFiltradas.get(0).getTipoHabitacion());
+        for (Habitacion habitacion: habitacionesFiltradas) {
+            System.out.println(habitacion.getHabitacionID());
+        }
     }
 
 
@@ -97,6 +96,9 @@ public class TestUnitario {
         // Verificar que se obtengan las habitaciones correctas
         Assert.assertEquals(2, habitacionesFiltradas.size());
         Assert.assertTrue(habitacionesFiltradas.get(0).getCantidadPersonas() >= cantidadPersonas);
+        for (Habitacion habitacion: habitacionesFiltradas) {
+            System.out.println(habitacion.getHabitacionID());
+        }
     }
 
 
@@ -118,6 +120,9 @@ public class TestUnitario {
         for (Habitacion habitacion : habitacionesFiltradas) {
             Assert.assertTrue(habitacion.getExtras().containsAll(extras));
         }
+        for (Habitacion habitacion: habitacionesFiltradas) {
+            System.out.println(habitacion.getHabitacionID());
+        }
     }
 
 
@@ -126,15 +131,20 @@ public class TestUnitario {
     public void testReservarHabitacion() {
         ControladorReserva controladorReserva = ControladorReserva.getInstancia();
         ControladorHabitacion controladorHabitacion = ControladorHabitacion.getInstancia();
+        ControladorCliente controladorCliente = ControladorCliente.getInstancia();
 
         List<Extra> extras = new ArrayList<>();
         Habitacion habitacion = new Habitacion(2, TipoHabitacion.INDIVIDUAL, extras, 100.0, 1);
-        
         controladorHabitacion.publicarHabitacion(habitacion);
+
+        Cliente cliente = new Cliente("Juan", "Perez", 123456, 11345678, "jperez@gmail.com", PreferenciaContacto.EMAIL);
+        controladorCliente.altaCliente(cliente);
 
         LocalDate checkIn = LocalDate.now().plusDays(1);
         LocalDate checkOut = LocalDate.now().plusDays(3);
-        Reserva reserva = new Reserva(1, checkIn, checkOut, LocalDate.now(), null, null, habitacion.getHabitacionID());
+        Reserva reserva = new Reserva(1, checkIn, checkOut, LocalDate.now(), controladorCliente.getListaClientes().get(0), null, controladorHabitacion.getListaHabitaciones().get(0).getHabitacionID());
+
+        
 
         controladorReserva.reservarHabitacion(reserva, habitacion);
 
@@ -144,19 +154,70 @@ public class TestUnitario {
         Assert.assertTrue(listaReservas.contains(reserva));
 
         // Verificar que la habitación tenga la reserva agregada en sus fechas ocupadas
-        List<LocalDate> reservasHabitacion = habitacion.getReservas();
+        List<LocalDate> reservasHabitacion = controladorHabitacion.getListaHabitaciones().get(0).getReservas();
+        for (LocalDate ocupcion:reservasHabitacion) {
+            System.out.println(ocupcion);
+        }
         Assert.assertEquals(3, reservasHabitacion.size());
         Assert.assertTrue(reservasHabitacion.contains(checkIn));
         Assert.assertTrue(reservasHabitacion.contains(checkOut));
     }
 
+    @Test
+    public void testCancelarReserva() {
+        ControladorReserva controladorReserva = ControladorReserva.getInstancia();
+        ControladorHabitacion controladorHabitacion = ControladorHabitacion.getInstancia();
+        ControladorCliente controladorCliente = ControladorCliente.getInstancia();
+
+        List<Extra> extras = new ArrayList<>();
+        Habitacion habitacion = new Habitacion(2, TipoHabitacion.INDIVIDUAL, extras, 100.0, 1);
+        controladorHabitacion.publicarHabitacion(habitacion);
+
+        Cliente cliente = new Cliente("Juan", "Perez", 123456, 11345678, "jperez@gmail.com", PreferenciaContacto.EMAIL);
+        controladorCliente.altaCliente(cliente);
+
+        LocalDate checkIn = LocalDate.now().plusDays(1);
+        LocalDate checkOut = LocalDate.now().plusDays(3);
+        Reserva reserva = new Reserva(1, checkIn, checkOut, LocalDate.now(), cliente, null, habitacion.getHabitacionID());
+
+        controladorReserva.reservarHabitacion(reserva, controladorHabitacion.getListaHabitaciones().get(0));
+        controladorReserva.cancelarReserva(controladorHabitacion.getListaHabitaciones().get(0), controladorReserva.getListaReservas().get(0));
+        
+        // Verificar que la habitación no tenga las fechas canceladas
+        List<LocalDate> reservasHabitacion = controladorHabitacion.getListaHabitaciones().get(0).getReservas();
+        for (LocalDate ocupcion:reservasHabitacion) {
+            System.out.println(ocupcion);
+        }
+
+    }
+
 
     //Actualizar parámetros de facturación (plazo en días y porcentaje de variación).
+    @Test
+    public void testModificarParametros() {
+        ControladorReserva controladorReserva = ControladorReserva.getInstancia();
+        ControladorCliente controladorCliente = ControladorCliente.getInstancia();
+        ControladorHabitacion controladorHabitacion = ControladorHabitacion.getInstancia();
+        
+        Habitacion habitacion = new Habitacion(2, TipoHabitacion.INDIVIDUAL, new ArrayList<>(), 100.0, 1);
+        controladorHabitacion.publicarHabitacion(habitacion);
+        Cliente cliente = new Cliente("Juan", "Perez", 123456, 11345678, "jperez@gmail.com", PreferenciaContacto.EMAIL);
+        controladorCliente.altaCliente(cliente);
+        Reserva reserva = new Reserva(1, LocalDate.of(2023, 6, 20), LocalDate.of(2023, 6, 25), LocalDate.of(2023, 6, 5), cliente, null, 1);
+        controladorReserva.reservarHabitacion(reserva, controladorHabitacion.getListaHabitaciones().get(0));
+        
+        FormaPago tarjetaCredito = new TarjetaCredito();
+        
+        //Modifico parametros del descuento y veo los cambios en el precio
+        controladorReserva.modificarDescuento(reserva, 15, .5, 60, -0.2);
+        controladorReserva.pagarReserva(controladorReserva.getListaReservas().get(0), tarjetaCredito);
 
+
+    }
     
     //Enviar facturas y notificaciones a clientes.
     @Test
-    public void testEnviarFactura() {
+    public void testEnviarFacturaNotificacion() {
         ControladorFactura controladorFactura = ControladorFactura.getInstancia();
         ControladorReserva controladorReserva = ControladorReserva.getInstancia();
         ControladorCliente controladorCliente = ControladorCliente.getInstancia();
@@ -167,20 +228,37 @@ public class TestUnitario {
 
         Cliente cliente = new Cliente("Juan", "Perez", 123456, 11345678, "jperez@gmail.com", PreferenciaContacto.EMAIL);
         controladorCliente.altaCliente(cliente);
-        Reserva reserva = new Reserva(1, LocalDate.of(2023, 6, 20), LocalDate.of(2023, 6, 25), LocalDate.of(2023, 6, 18), cliente, null, 1);
+        Reserva reserva = new Reserva(1, LocalDate.of(2023, 6, 20), LocalDate.of(2023, 6, 25), LocalDate.of(2023, 6, 5), cliente, null, 1);
         controladorReserva.reservarHabitacion(reserva, controladorHabitacion.getListaHabitaciones().get(0));
         
         FormaPago tarjetaCredito = new TarjetaCredito();
-        controladorReserva.pagarReserva(controladorReserva.getListaReservas().get(0), tarjetaCredito, DescuentoAplicable.DESCUENTO_FECHA);
+        controladorReserva.pagarReserva(controladorReserva.getListaReservas().get(0), tarjetaCredito);
         controladorFactura.generarFactura(controladorReserva.getListaReservas().get(0));
         
         Factura factura = controladorFactura.getListaFacturas().get(0);
         controladorFactura.enviarFactura(controladorCliente.getListaClientes().get(0), controladorFactura.getListaFacturas().get(0));
 
-
         // Comprobar que la factura se genero correctamente
         Assert.assertEquals(factura, controladorFactura.getListaFacturas().get(0));
         assertTrue(true);
+    }
+
+    @Test
+    public void testGenerarReporte() {
+        ControladorReserva controladorReserva = ControladorReserva.getInstancia();
+        ControladorCliente controladorCliente = ControladorCliente.getInstancia();
+        ControladorHabitacion controladorHabitacion = ControladorHabitacion.getInstancia();
+        ControladorReportes controladorReportes = ControladorReportes.getInstancia();
+        
+        Habitacion habitacion = new Habitacion(2, TipoHabitacion.INDIVIDUAL, new ArrayList<>(), 100.0, 1);
+        controladorHabitacion.publicarHabitacion(habitacion);
+        Cliente cliente = new Cliente("Juan", "Perez", 123456, 11345678, "jperez@gmail.com", PreferenciaContacto.EMAIL);
+        controladorCliente.altaCliente(cliente);
+        Reserva reserva = new Reserva(1, LocalDate.of(2023, 6, 20), LocalDate.of(2023, 6, 25), LocalDate.of(2023, 6, 5), cliente, null, 1);
+        controladorReserva.reservarHabitacion(reserva, controladorHabitacion.getListaHabitaciones().get(0));
+
+        controladorReportes.generarReporte(controladorHabitacion.getListaHabitaciones());
+        controladorReportes.getListaReportes().get(0).imprimir();
     }
 }
 

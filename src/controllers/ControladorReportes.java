@@ -18,13 +18,17 @@ public class ControladorReportes {
     }
     private List<Reporte> listaReportes = new ArrayList<Reporte>();
 
+    public List<Reporte> getListaReportes() {
+        return this.listaReportes;
+    }
+
     public void generarReporte(List<Habitacion> listaHabitaciones) {
         Reporte reporte = new Reporte();
         String contenido = "";
         for (Habitacion habitacion:listaHabitaciones) {
             contenido = contenido + "\nLa habitacion " + habitacion.getHabitacionID() + " se encuentra ocupada las siguientes fechas: " ;
             for (LocalDate fecha: habitacion.getReservas()) {
-                contenido = contenido + fecha;
+                contenido = contenido + "\n"+fecha;
             }
         }
         reporte.setContenido(contenido);

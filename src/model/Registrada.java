@@ -8,10 +8,9 @@ import interfaces.INotificacion;
 
 public class Registrada implements IEstadoReserva {
     @Override
-    public void pagar(Reserva reserva, FormaPago formaPago, Descuento descuento) {
+    public void pagar(Reserva reserva, FormaPago formaPago) {
         reserva.setEstadoReserva(new Pagada());
-        reserva.setEstrategiaDescuento(descuento);
-        reserva.CalcularDescuento();
+        reserva.getEstrategiaDescuento().calcularDescuento(reserva);
         Pago pago = new Pago(formaPago);
         reserva.setPago(pago);
         reserva.getPago().PagarReserva(reserva.getMontoFinal());
@@ -30,4 +29,9 @@ public class Registrada implements IEstadoReserva {
             INotificacion notificacion = FactoryNotificacion.crearEstrategiaNotificacion(reserva.getCliente().getPreferenciaContacto());
             notificacion.enviarModificacion(reserva.getCliente(), reserva);
         }
+
+    @Override
+    public String toString() {
+        return "Registrada";
+    }
 }

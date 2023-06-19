@@ -6,7 +6,7 @@ public class SMS implements INotificacion {
 
     @Override
     public void enviarFactura(Cliente cliente, Factura factura) {
-        System.out.println("Envio de factura mediante SMS al cliente" + cliente.getNombre());
+        System.out.println("Envio de factura mediante SMS al cliente " + cliente.getNombre());
         System.out.println(factura.getContenido());
     }
 

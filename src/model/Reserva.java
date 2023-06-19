@@ -62,6 +62,10 @@ public class Reserva {
         this.estrategiaDescuento = estrategiaDescuento;
     }
 
+    public Descuento getEstrategiaDescuento() {
+        return estrategiaDescuento;
+    }
+
     public int getNroReserva() {
         return nroReserva;
     }
@@ -75,7 +79,7 @@ public class Reserva {
         this.cliente = cliente;
         this.huespedes = huespedes;
         this.estadoReserva = new Registrada();
-        this.estrategiaDescuento = estrategiaDescuento;
+        this.estrategiaDescuento = new DescuentoPorFecha();
         this.habitacionID = habitacionID;
     }
 

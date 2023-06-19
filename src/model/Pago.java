@@ -12,4 +12,8 @@ public class Pago {
     public void PagarReserva(double monto) {
         this.formaPago.pagar(monto);
     }
+
+    public FormaPago getFormaPago() {
+        return formaPago;
+    }
 }
