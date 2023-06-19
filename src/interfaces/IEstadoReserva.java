@@ -1,7 +1,6 @@
 package interfaces;
 
 import model.Descuento;
-import model.FormaPago;
 import model.Habitacion;
 import model.Reserva;
 

@@ -2,6 +2,7 @@ package model;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
+import interfaces.FormaPago;
 import interfaces.IEstadoReserva;
 import interfaces.INotificacion;
 

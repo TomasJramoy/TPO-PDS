@@ -2,7 +2,9 @@ package model;
 
 import java.time.LocalDate;
 
-public abstract class Tarjeta extends FormaPago {
+import interfaces.FormaPago;
+
+public abstract class Tarjeta implements FormaPago {
     private double numero;
     private LocalDate vencimiento;
     private Integer cvv;

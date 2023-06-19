@@ -1,5 +1,5 @@
-package model;
+package interfaces;
 
-public abstract class FormaPago {
+public interface FormaPago {
     public abstract void pagar(double monto);
 }

@@ -1,6 +1,8 @@
 package model;
 
-public class Transferencia extends FormaPago {
+import interfaces.FormaPago;
+
+public class Transferencia implements FormaPago {
     private double cvu;
     private AdaptadorMercadoPago adaptador;
    

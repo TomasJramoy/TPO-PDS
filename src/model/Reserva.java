@@ -7,7 +7,7 @@ import interfaces.IEstadoReserva;
 
 
 public class Reserva {
-    private Integer nroReserva;
+    private int nroReserva;
     private LocalDate checkIn;
     private LocalDate checkOut;
     private LocalDate fechaReserva;
@@ -62,7 +62,7 @@ public class Reserva {
         this.estrategiaDescuento = estrategiaDescuento;
     }
 
-    public Integer getNroReserva() {
+    public int getNroReserva() {
         return nroReserva;
     }
 

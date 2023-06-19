@@ -1,5 +1,6 @@
 package model;
 
+import interfaces.FormaPago;
 import interfaces.IEstadoReserva;
 
 public class Cancelada implements IEstadoReserva {

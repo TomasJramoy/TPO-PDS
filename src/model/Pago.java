@@ -1,5 +1,7 @@
 package model;
 
+import interfaces.FormaPago;
+
 public class Pago {
     private FormaPago formaPago;
 

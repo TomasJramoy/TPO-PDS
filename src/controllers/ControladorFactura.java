@@ -18,6 +18,9 @@ public class ControladorFactura {
     }
     private List<Factura> listaFacturas = new ArrayList<Factura>();
 
+    public List<Factura> getListaFacturas() {
+        return listaFacturas;
+    }
 
     public void generarFactura(Reserva reserva) {
         if (reserva.getEstadoReserva().toString()=="Pagada") {

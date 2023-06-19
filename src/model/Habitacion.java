@@ -8,13 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Habitacion {
-    private Integer cantidadPersonas;
+    private int cantidadPersonas;
     private TipoHabitacion tipoHabitacion;
     private List<Extra> extras;
     private double precioNoche;
     private List<LocalDate> reservas;
 
-    public Integer getCantidadPersonas() {
+    public int getCantidadPersonas() {
         return cantidadPersonas;
     }
 
@@ -28,7 +28,7 @@ public class Habitacion {
 
     private Integer habitacionID;
 
-    public Habitacion(Integer cantidadPersonas, TipoHabitacion tipoHabitacion, List<Extra> extras, double precioNoche, Integer habitacionID) {
+    public Habitacion(int cantidadPersonas, TipoHabitacion tipoHabitacion, List<Extra> extras, double precioNoche, int habitacionID) {
         this.cantidadPersonas = cantidadPersonas;
         this.tipoHabitacion = tipoHabitacion;
         this.extras = extras;
