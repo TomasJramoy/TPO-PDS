@@ -78,7 +78,7 @@ public class ControladorReserva {
 
 
     public void reservarHabitacion(Reserva reserva, Habitacion habitacion) {
-        if (!habitacion.getReservas().contains(reserva.getCheckIn()) || !habitacion.getReservas().contains(reserva.getCheckOut())) {
+        if (!(habitacion.getReservas().contains(reserva.getCheckIn()) || habitacion.getReservas().contains(reserva.getCheckOut()))) {
             INotificacion notificacion = FactoryNotificacion.crearEstrategiaNotificacion(reserva.getCliente().getPreferenciaContacto());
             notificacion.enviarModificacion(reserva.getCliente(), reserva);
             reserva.setMonto(calcularMontoReserva(reserva, habitacion));

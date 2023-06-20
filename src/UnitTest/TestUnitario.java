@@ -163,6 +163,27 @@ public class TestUnitario {
         Assert.assertTrue(reservasHabitacion.contains(checkOut));
     }
 
+     @Test
+    public void testReservarHabitacionOcupada() {
+        ControladorReserva controladorReserva = ControladorReserva.getInstancia();
+        ControladorHabitacion controladorHabitacion = ControladorHabitacion.getInstancia();
+        ControladorCliente controladorCliente = ControladorCliente.getInstancia();
+
+        List<Extra> extras = new ArrayList<>();
+        Habitacion habitacion = new Habitacion(2, TipoHabitacion.INDIVIDUAL, extras, 100.0, 1);
+        controladorHabitacion.publicarHabitacion(habitacion);
+
+        Cliente cliente = new Cliente("Juan", "Perez", 123456, 11345678, "jperez@gmail.com", PreferenciaContacto.EMAIL);
+        controladorCliente.altaCliente(cliente);
+
+        Reserva reserva = new Reserva(1, LocalDate.of(2023, 7, 10), LocalDate.of(2023, 7, 15), LocalDate.now(), controladorCliente.getListaClientes().get(0), null, controladorHabitacion.getListaHabitaciones().get(0).getHabitacionID());
+        controladorReserva.reservarHabitacion(reserva, controladorHabitacion.getListaHabitaciones().get(0));
+        Reserva reserva2 = new Reserva(2, LocalDate.of(2023, 7, 12), LocalDate.of(2023, 7, 14), LocalDate.now(), controladorCliente.getListaClientes().get(0), null, controladorHabitacion.getListaHabitaciones().get(0).getHabitacionID());
+        controladorReserva.reservarHabitacion(reserva2, controladorHabitacion.getListaHabitaciones().get(0));
+
+    }
+
+
     @Test
     public void testCancelarReserva() {
         ControladorReserva controladorReserva = ControladorReserva.getInstancia();
